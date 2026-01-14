@@ -13,15 +13,15 @@ t_link *new_node(int b)
     return node;
 }
 
-void add_node(t_link *node, t_link *head)
+void add_node(t_link *node, t_link **head)
 {
-    if (!head)
+    if (! *head)
     {
-        head = node;
+        *head = node;
         return;
     }
     
-    t_link *s = head;
+    t_link *s = *head;
 
     while (s -> next != NULL)
     {
@@ -30,9 +30,11 @@ void add_node(t_link *node, t_link *head)
     s -> next = node;
 }
 
-void free_list(t_link *link)
+void free_list(t_link **head)
 {
-    t_link *s = link;
+    if(*head == NULL)
+        return;
+    t_link *s = *head;
     t_link *tmp;
     while (s)
     {
@@ -41,3 +43,4 @@ void free_list(t_link *link)
        s = tmp;
     }
 }
+
